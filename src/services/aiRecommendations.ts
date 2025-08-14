@@ -30,7 +30,12 @@ export class AIRecommendationService {
   private static openai: OpenAI | null = null;
 
   private static isValidApiKey(key: string | undefined): boolean {
-    return key && key.trim() !== '' && !key.includes('your_') && key.length > 20;
+    return key && 
+           key.trim() !== '' && 
+           !key.includes('your_') && 
+           !key.includes('placeholder') &&
+           key.startsWith('sk-') && 
+           key.length >= 40;
   }
 
   private static getOpenAI(): OpenAI {
